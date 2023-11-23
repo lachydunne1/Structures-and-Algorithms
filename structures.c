@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define HASH_LENGTH 45 // length of word in node (for hash tables)
 /*
     This ad-hoc library contains sort algos and shitty data structures
