@@ -1,5 +1,5 @@
-#ifndef AD_HOC_LIB_H
-#define AD_HOC_LIB_H
+#ifndef structures_h
+#define structures_h
 
 #include <ctype.h>
 #include <stdbool.h>
@@ -58,7 +58,23 @@ void ms_divide(sllist *list, sllist *secondhalf);
 void merge(sllist *first, sllist *second, sllist *out);
 void merge_sort(sllist *list);
 
+// Trees
+
+typedef struct treenode{
+    int value;
+    struct treenode *left;
+    struct treenode *right;
+} treenode;
+
+typedef struct tree{
+    treenode *root;
+    int size;
+} tree;
+
+treenode* create_treenode(int value);
+
+
 // General Functions
 int factorial(int n);
 
-#endif // AD_HOC_LIB_H
+#endif // structures_h

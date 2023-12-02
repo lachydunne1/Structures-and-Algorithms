@@ -190,7 +190,27 @@ void free_stack(stack* stack){
     }
     free(stack); //once reached, free bottom node
 }
+typedef struct treenode{
+    int value;
+    struct treenode *left;
+    struct treenode *right;
+} treenode;
 
+typedef struct tree{
+    treenode *root;
+    int size;
+} tree;
+
+treenode *create_treeenode(int value){
+
+    treenode* result = (treenode*) malloc(sizeof(treenode));
+    if (result!= NULL){
+        result->left = NULL;
+        result->right = NULL;
+        result->value = value;
+    }
+    return result;
+}
 /*
     General Functions:
     factorial: As is, computes the factorial.
