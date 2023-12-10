@@ -1,3 +1,6 @@
+#ifndef algos_h
+#define algos_h
+
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -22,3 +25,5 @@ void matrix_sum(int16_t* m_A, uint8_t* size_M, int16_t*  m_B, int16_t* output);
 void matrix_add(int16_t* m_A, uint8_t* size_A, int k, int16_t* output);
 void matrix_scale(int16_t* m_A, uint8_t* size_A, int16_t k, int16_t* output);
 void matrix_mul(uint16_t *A, uint8_t dims_A[], uint16_t *B, uint8_t dims_B[], uint16_t *result);
+
+#endif //algos_h

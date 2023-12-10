@@ -6,7 +6,10 @@
 #include <stdlib.h>
 
 
-#define HASH_LENGTH 45 // length of word in node (for hash tables)
+#define HASH_LENGTH 45 
+// length of word in node (for hash tables)
+// be careful as hashing words with more chars than 45 leads
+// to buffer overflow.
 /*
     This ad-hoc library contains sort algos and shitty data structures
     so that I can attempt to keep track of them. They will be poorly defined
@@ -30,8 +33,6 @@ unsigned int size(void);
 
 int32_t hash(const char *word);
 
-
-
 typedef struct hash_node
 {
     char word[HASH_LENGTH + 1];
@@ -43,6 +44,13 @@ typedef struct hash_node
     returns a hash index for each string literal, resulting 'unique'
     hash index, ignoring collsions
 */
+
+// strange scope here - declared in h file too.
+// declared on top of source due to the need for the hash table in functions
+
+const uint32_t buckets = 10;
+extern hash_table[buckets];
+
 int32_t hash(const char *word)
 {
     int32_t prime = 982451653;
@@ -53,6 +61,117 @@ int32_t hash(const char *word)
     }
    return hashIndex % prime;
 }
+
+void hash_table_init(){
+    for (int i = 0; i < HASH_LENGTH; i++)
+        hash_table[i] =NULL;
+    //initialize empty hash table.
+}
+
+void print_table(){
+    //print empty and stored names in hash table. \t placeholder is tab.
+    for (int i = 0; i < HASH_LENGTH; i++){
+        if (hash_table[i] == NULL){
+            printf("\t%i\t---\n");
+        } else{
+            printf("\t%i\t %s\n");
+        }
+    }
+
+}
+
+bool hash_store_word(const char *word)
+{
+    hash_node *new_node = malloc(sizeof(hash_node));
+    if (new_node == NULL)
+    {
+        printf("Failed to allocate space for new node. \n");
+        return false;
+    }
+
+    int hashed = hash(word);
+    //copy word into node
+    strcpy(new_node->word, word);
+
+    if (hash_table[hashed] == NULL){
+        //store word in new node
+        hash_table[hashed] = new_node;
+        new_node->next = NULL;
+    }
+    else{
+        //if word exists in hash table, we can
+        //use the same index to extend it.
+        new_node->next = hash_table[hashed];
+        hash_table[hashed] = new_node;
+    }
+    return true;
+}
+
+//hashes a file in pathway and stores in table. Dictionary size should be
+//0 initially.
+bool hash_file(const char *dictionary, uint16_t dictionary_size)
+{
+    FILE *file = fopen(dictionary, 'r');
+    if (file == NULL){
+        fclose(file);
+        printf("Couldn't open %s.\n", dictionary);
+        return false;
+    }
+
+    char word[HASH_LENGTH + 1];
+    
+    while (fscanf(file, "%s", word) != EOF)
+    {   
+        //allocate memory for a new node
+        hash_node *new_node = malloc(sizeof(hash_node));
+        if (new_node == NULL){
+            fclose(file);
+            printf("Couldn't allocate memory for new node. \n");
+            return false;
+        }
+
+        //copy word into node
+        strcpy(new_node->word, word);
+
+        //hash word to index for table
+        int hashed = hash(word);
+
+        //if word is new, allocate new memory, otherwise use 
+        //existing structure
+        if (hash_table[hashed] == NULL)
+        {
+            hash_table[hashed]= new_node;
+            new_node ->next = NULL;
+        }
+        else 
+        {
+            new_node->next =hash_table[hashed];
+            hash_table[hashed] = new_node;
+        }
+
+        dictionary_size++;
+    }
+    fclose(file);
+    return true;
+}
+
+bool check_word(char* word)
+{
+    //get index for word
+    int index = hash(word);
+    
+    for (hash_node *temp = hash_table[index]; temp != NULL; temp = temp->next)
+    {
+        if (strcmp(temp->word, word) == 0){
+            printf("Word is in hash table. \n");
+            return true;
+        }
+    }
+    printf("Word isn't in hash table. \n");
+    return false;
+
+}
+
 
 /* Singly Linked List:
     Below are some setup functions/structs for singly linked lists.

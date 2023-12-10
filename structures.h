@@ -6,18 +6,32 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 #define HASH_LENGTH 45 // length of word in node (for hash tables)
 
 // Hash Table
+
 typedef struct hash_node {
     char word[HASH_LENGTH + 1];
     struct node *next;
 } hash_node;
 
+
+const uint32_t buckets = 100000;
+extern hash_table[buckets];
+
+
 unsigned int size(void);
 int32_t hash(const char *word);
+
+void hash_table_init(void);
+void print_table(void);
+bool hash_store_word(const char *word);
+bool hash_file(const char *dictionary, uint16_t dictionary_size);
+bool check_word(char word);
+
 
 // Singly Linked List
 typedef struct sllnode {
