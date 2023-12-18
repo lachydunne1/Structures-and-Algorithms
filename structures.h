@@ -10,28 +10,26 @@
 #include <stdlib.h>
 
 #define HASH_LENGTH 45 // length of word in node (for hash tables)
-
+#define buckets 10000
 // Hash Table
 
 typedef struct hash_node {
-    char word[HASH_LENGTH + 1];
-    struct node *next;
+    const char word[HASH_LENGTH + 1];
+    struct hash_node *next;
 } hash_node;
 
 
-const uint32_t buckets = 100000;
-extern hash_table[buckets];
-
+extern hash_node* hash_table[];
 
 unsigned int size(void);
 int32_t hash(const char *word);
 
-void hash_table_init(void);
+void hash_init(void);
 void print_table(void);
 bool hash_store_word(const char *word);
+bool hash_delete_word(const char *word);
 bool hash_file(const char *dictionary, uint16_t dictionary_size);
-bool check_word(char word);
-
+bool check_word(const char *word);
 
 // Singly Linked List
 typedef struct sllnode {
@@ -58,13 +56,13 @@ typedef struct {
     int size;
 } stack;
 
-stack* create_stack();
-int push(stack* stack, int value);
-int pop(stack* stack);
-int peek(stack* stack);
-void stack_is_empty(stack* stack);
-int stack_size(stack* stack);
-void free_stack(stack* stack);
+stack* create_stack(void);
+int push(stack* stck, int value);
+int pop(stack* stck);
+int peek(stack* stck);
+bool stack_is_empty(stack* stck);
+int stack_size(stack* stck);
+void free_stack(stack* stck);
 
 // Sorting Algorithms
 void bubble_sort(int* arr, int numsSize);

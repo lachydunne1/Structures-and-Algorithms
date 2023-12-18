@@ -8,8 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <structures.h>
-
+#include "structures.h"
 
 // Sorting Algorithms
 void bubble_sort(int* arr, int numsSize);

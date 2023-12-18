@@ -170,7 +170,7 @@ void matrix_print(int16_t *matrix, uint8_t *dim){
         for (uint8_t j = 0; j<dim[1]; j++){
             printf("% 6d ", matrix[i * dim[1] + j]);
         }
-        printf('\n');
+        printf("\n");
     }
 }
 
