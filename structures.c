@@ -306,24 +306,6 @@ void free_stack(stack* stck){
 }
 
 
-/*
-    Trees:
-*/
-treenode *create_treenode(int value){
-
-    treenode* result = (treenode*) malloc(sizeof(treenode));
-    if (result!= NULL){
-        result->left = NULL;
-        result->right = NULL;
-        result->value = value;
-    }
-    return result;
-}
-/*
-    General Functions:
-    factorial: As is, computes the factorial.
-*/
-
 int factorial(int n)
 {
 	if (n==0)
@@ -331,4 +313,6 @@ int factorial(int n)
 	else
 	 	return n* factorial(n - 1);
 }
+
+
 

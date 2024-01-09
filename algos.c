@@ -26,11 +26,11 @@
 
 */
 
-void bubble_sort(int* arr,int  numsSize) 
+void bubble_sort_int(int* arr,int  size) 
 {
     int i, j , temp;
-    for (i = 0; i < numsSize - 1; i++){ // initial loop
-        for (j = 0; j < numsSize - i - 1; j++){ // initial loop conditon for bubble sort
+    for (i = 0; i < size - 1; i++){ // initial loop
+        for (j = 0; j < size - i - 1; j++){ // initial loop conditon for bubble sort
             if ( arr[j] > arr[j + 1]) {
                 // swapping the elements
                 temp = arr[j]; 
@@ -42,8 +42,23 @@ void bubble_sort(int* arr,int  numsSize)
 
 }
 
+void bubble_sort_float(double* arr, int size)
+{
+    int i, j;
+    double temp; 
+    for (i = 0; i< size -1; i++){
+        for (j=0; j<size - j - 1; j++){
+            if ( arr[j] > arr[j+1]){
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+            }
+        }
 
-void insertion_sort(int* arr, int numsSize){
+    }
+}
+
+void insertion_sort_int(int* arr, int numsSize){
 
    int key, j;
    for (int i = 1; i < numsSize; i++){
@@ -58,6 +73,27 @@ void insertion_sort(int* arr, int numsSize){
         arr[j+1] = key;
    }
 }
+
+void insertion_sort_float(double* arr, int size){
+
+    int i, j;
+    double key;
+
+    for (i = 1; i<size; i++){
+
+        key = arr[i];
+        j = i-1;
+
+        while((j>=0) && arr[j] > key){
+            arr[j+1] = arr[j];
+            j = j - 1;
+        }
+        arr[j+1] = key;
+
+    }
+}
+
+
 
 void ms_divide(sllist *list, sllist *secondhalf)
 {

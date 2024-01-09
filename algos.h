@@ -11,11 +11,16 @@
 #include "structures.h"
 
 // Sorting Algorithms
-void bubble_sort(int* arr, int numsSize);
+void bubble_sort_int(int* arr, int size);
+void bubble_sort_float(double* arr, int size);
+
 void ms_divide(sllist *list, sllist *secondhalf);
+
 void merge(sllist *first, sllist *second, sllist *out);
 void merge_sort(sllist *list);
-void insertion_sort(int* arr, int numsSize);
+
+void insertion_sort_int(int* arr, int size);
+void insertion_sort_float(double* arr, int size);
 
 
 void matrix_zero(int16_t *matrix, uint8_t elements);

@@ -70,20 +70,7 @@ void ms_divide(sllist *list, sllist *secondhalf);
 void merge(sllist *first, sllist *second, sllist *out);
 void merge_sort(sllist *list);
 
-// Trees
 
-typedef struct treenode{
-    int value;
-    struct treenode *left;
-    struct treenode *right;
-} treenode;
-
-typedef struct tree{
-    treenode *root;
-    int size;
-} tree;
-
-treenode* create_treenode(int value);
 
 
 // General Functions

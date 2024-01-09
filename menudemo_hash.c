@@ -22,7 +22,6 @@ int main(void)
     while(1)
         do_cmd(get_cmd());
     return 1;
-
 }
 
 
@@ -64,8 +63,8 @@ int get_cmd(void)
     
 }
 
-void do_cmd(int cmd){
-    
+void do_cmd(int cmd)
+{    
     //used with scanf to store a word. This function should only
     //be executed once on command, word is updated. This may be a 
     //source of error.
